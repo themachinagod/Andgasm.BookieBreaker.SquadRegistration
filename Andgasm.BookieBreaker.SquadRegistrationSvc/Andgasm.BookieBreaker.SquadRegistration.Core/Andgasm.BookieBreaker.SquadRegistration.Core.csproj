@@ -4,4 +4,17 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Andgasm.BookieBreaker.Harvest" Version="0.0.4" />
+    <PackageReference Include="Andgasm.Http" Version="0.0.1" />
+    <PackageReference Include="Andgasm.ServiceBus" Version="0.0.1" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.8.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions">
+      <HintPath>..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.hosting.abstractions\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
