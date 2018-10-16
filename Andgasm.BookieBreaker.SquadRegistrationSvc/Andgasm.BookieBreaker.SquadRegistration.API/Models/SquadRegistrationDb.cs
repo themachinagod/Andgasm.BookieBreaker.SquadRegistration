@@ -4,7 +4,7 @@ namespace Andgasm.BookieBreaker.SquadRegistration.API
 {
     public class SquadRegistrationDb : DbContext
     {
-        public SquadRegistrationDb() : base()
+        public SquadRegistrationDb(DbContextOptions options) : base(options)
         {
         }
 

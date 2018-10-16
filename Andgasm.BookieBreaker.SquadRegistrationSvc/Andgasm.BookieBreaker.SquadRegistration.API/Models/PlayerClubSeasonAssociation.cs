@@ -5,12 +5,16 @@ namespace Andgasm.BookieBreaker.SquadRegistration.API
     public class PlayerClubSeasonAssociation
     {
         [Key]
+        public string Key
+        {
+            get
+            {
+                return $"{ClubKey}-{SeasonKey}-{PlayerKey}";
+            }
+            set { }
+        }
         public string ClubKey { get; set; }
-
-        [Key]
         public string SeasonKey { get; set; }
-
-        [Key]
         public string PlayerKey { get; set; }
     }
 }
