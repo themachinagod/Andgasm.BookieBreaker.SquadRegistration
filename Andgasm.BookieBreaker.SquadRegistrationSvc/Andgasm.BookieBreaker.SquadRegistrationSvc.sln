@@ -10,6 +10,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SquadRegistration.Core", "Andgasm.BookieBreaker.SquadRegistration.Core\Andgasm.BookieBreaker.SquadRegistration.Core.csproj", "{BD250895-9E9D-4E2E-80AF-B9205445B19A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Artifacts", "Artifacts", "{4CE8ABBA-190E-49A1-BD6B-6A1C63E98788}"
+	ProjectSection(SolutionItems) = preProject
+		..\ReadMe.md = ..\ReadMe.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{54B032EC-8AB3-4BB7-AB12-961DF70E5381}"
 EndProject
