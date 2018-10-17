@@ -31,26 +31,7 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
             //}
 
             // DBr: temp scratch code line to manually test without bus!!
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            //await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
 
             _logger.LogDebug("SquadRegistrationExtractor.Svc is registering to new season participant events...");
             _newClubSeasonAssociationBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
@@ -75,7 +56,7 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
             _harvester.SeasonCode = payloadvalues.StageCode;
             _harvester.StageCode = payloadvalues.SeasonCode;
             await _harvester.Execute();
-            //await _newClubSeasonAssociationBus.CompleteEvent(message.LockToken);
+            await _newClubSeasonAssociationBus.CompleteEvent(message.LockToken);
         }
 
         static Task ExceptionReceivedHandler(IExceptionArgs exceptionReceivedEventArgs)
@@ -90,14 +71,14 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
         }
 
         // scratch code to manually invoke new season - invoke from startasync to debug without bus
-        static BusEventBase BuildNewClubSeasonAssociationEvent(string clubcode, string stagecode, string seasoncode)
-        {
-            dynamic jsonpayload = new ExpandoObject();
-            jsonpayload.SeasonCode = seasoncode;
-            jsonpayload.StageCode = stagecode;
-            jsonpayload.ClubCode = clubcode;
-            var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
-            return new BusEventBase(payload);
-        }
+        //static BusEventBase BuildNewClubSeasonAssociationEvent(string clubcode, string stagecode, string seasoncode)
+        //{
+        //    dynamic jsonpayload = new ExpandoObject();
+        //    jsonpayload.SeasonCode = seasoncode;
+        //    jsonpayload.StageCode = stagecode;
+        //    jsonpayload.ClubCode = clubcode;
+        //    var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
+        //    return new BusEventBase(payload);
+        //}
     }
 }
