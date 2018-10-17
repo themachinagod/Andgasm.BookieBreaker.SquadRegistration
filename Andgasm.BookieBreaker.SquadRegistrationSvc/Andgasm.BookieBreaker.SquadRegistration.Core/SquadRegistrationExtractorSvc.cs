@@ -32,6 +32,25 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
 
             // DBr: temp scratch code line to manually test without bus!!
             await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
 
             _logger.LogDebug("SquadRegistrationExtractor.Svc is registering to new season participant events...");
             _newClubSeasonAssociationBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);

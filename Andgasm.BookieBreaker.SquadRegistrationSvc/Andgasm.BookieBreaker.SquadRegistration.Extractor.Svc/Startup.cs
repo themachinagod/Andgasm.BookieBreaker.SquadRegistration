@@ -56,7 +56,11 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Extractor.Svc
                     .SetMinimumLevel(LogLevel.Debug));
 
                 services.AddTransient(typeof(SquadRegistrationHarvester));
-                services.AddSingleton(typeof(HarvestRequestManager));
+                services.AddSingleton((ctx) =>
+                {
+                    return new HarvestRequestManager(ctx.GetService<ILogger<HarvestRequestManager>>(),
+                                                     Convert.ToInt32(Configuration["MaxRequestsPerSecond"]));
+                });
 
                 services.AddSingleton(sp =>
                 {
