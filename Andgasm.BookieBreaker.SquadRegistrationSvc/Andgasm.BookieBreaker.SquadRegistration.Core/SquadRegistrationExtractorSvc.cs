@@ -49,10 +49,9 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
             _logger.LogDebug($"Received message: Body:{payload}");
 
             dynamic payloadvalues = JsonConvert.DeserializeObject<ExpandoObject>(payload);
-            _harvester.ClubKey = payloadvalues["clubkey"];
-            _harvester.SeasonKey = payloadvalues["seasonkey"];
-            _harvester.StageCode = payloadvalues["stagecode"];
-            _harvester.ClubSeasonCode = payloadvalues["clubseasoncode"];
+            _harvester.ClubCode = payloadvalues.ClubCode;
+            _harvester.SeasonCode = payloadvalues.StageCode;
+            _harvester.StageCode = payloadvalues.SeasonCode;
             await _harvester.Execute();
             await _newClubSeasonAssociationBus.CompleteEvent(message.LockToken);
         }

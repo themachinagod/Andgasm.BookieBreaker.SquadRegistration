@@ -22,10 +22,9 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
         #endregion
 
         #region Properties
-        public string ClubSeasonCode { get; set; }
         public string StageCode { get; set; }
-        public string SeasonKey { get; set; }
-        public string ClubKey { get; set; }
+        public string SeasonCode { get; set; }
+        public string ClubCode { get; set; }
         #endregion
 
         #region Contructors
@@ -62,11 +61,11 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
                         players.Add(CreateSquadPlayer(pl));
                     };
                     await HttpRequestFactory.Post(players, _playersapiroot, _registrationsApiPath);
-                    _logger.LogDebug(string.Format("Stored new player data to database for club key '{0}' and season key '{1}'", ClubKey, SeasonKey));
+                    _logger.LogDebug(string.Format("Stored new player data to database for club key '{0}' and season key '{1}'", ClubCode, SeasonCode));
                 }
                 else
                 {
-                    _logger.LogDebug(string.Format("Failed to store & commit player squad registration for season '{0}' in data store.", SeasonKey));
+                    _logger.LogDebug(string.Format("Failed to store & commit player squad registration for season '{0}' in data store.", SeasonCode));
                 }
                 HarvestHelper.FinaliseTimer(_timer);
             };
@@ -76,12 +75,12 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
         #region Entity Creation Helpers
         private string CreateRequestUrl()
         {
-            return string.Format(WhoScoredConstants.PlayerStatisticsFeedUrl, StageCode, ClubSeasonCode);
+            return string.Format(WhoScoredConstants.PlayerStatisticsFeedUrl, StageCode, ClubCode);
         }
 
         private string CreateRefererUrl()
         {
-            return string.Format(WhoScoredConstants.ClubsUrl, ClubSeasonCode);
+            return string.Format(WhoScoredConstants.ClubsUrl, ClubCode);
         }
 
         private async Task<string> DetermineLastModeKey()
@@ -130,8 +129,8 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
             player.Height = playerdata["height"].ToString();
             player.Weight = playerdata["weight"].ToString();
             player.Positions = playerdata["playedPositionsShort"].ToString();
-            player.ClubKey = ClubKey;
-            player.SeasonKey = SeasonKey;
+            player.ClubKey = ClubCode;
+            player.SeasonKey = SeasonCode;
             player.PlayerKey = player.Key;
             return player;
         }

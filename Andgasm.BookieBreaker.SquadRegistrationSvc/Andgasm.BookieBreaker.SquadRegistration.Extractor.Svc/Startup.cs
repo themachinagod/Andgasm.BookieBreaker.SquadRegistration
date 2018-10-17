@@ -6,8 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Andgasm.BookieBreaker.SquadRegistration.Extractor.Svc
 {
@@ -48,7 +46,7 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Extractor.Svc
                 {
                     return new ApiSettings()
                     {
-                        SeasonsDbApiRootKey = Configuration.GetSection("API")["SeasonsDbApiRootKey"],
+                        PlayersDbApiRootKey = Configuration.GetSection("API")["PlayersDbApiRootKey"],
                         ClubSeasonRegistrationsApiPath = Configuration.GetSection("API")["ClubSeasonRegistrationsApiPath"]
                     };
                 });
@@ -64,8 +62,8 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Extractor.Svc
                 {
                     return ServiceBusFactory.GetBus(Enum.Parse<BusHost>(Configuration.GetSection("ServiceBus")["ServiceBusHost"]),
                                                                         Configuration.GetSection("ServiceBus")["ServiceBusConnectionString"],
-                                                                        Configuration.GetSection("ServiceBus")["NewClubSeasonAssociationSubscriptionName"],
-                                                                        Configuration.GetSection("ServiceBus")["NewClubSeasonAssociationTopicName"]);
+                                                                        Configuration.GetSection("ServiceBus")["NewClubSeasonAssociationTopicName"],
+                                                                        Configuration.GetSection("ServiceBus")["NewClubSeasonAssociationSubscriptionName"]);
                 });
 
                 services.AddScoped<IHostedService, SquadRegistrationExtractorSvc>();
