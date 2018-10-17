@@ -93,9 +93,6 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
                                                             @"euconsent=BOVu1IfOVu1IfABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; visid_incap_774904=/t5l9RDSS5C89/fvHh+pv01xTFsAAAAASUIPAAAAAACAXZWHAbkPzqLpwgKF6J+VxSsT1yPC6hpU; incap_ses_867_774904=D9LZV2Cj1UhtRXUXbzQIDL0Bx1sAAAAA8B31aB37Vng6nilidRNF+A==",
                                                             "en-GB,en;q=0.9,en-US;q=0.8,th;q=0.7", false, true, true);
             var parentresponse = await _requestmanager.MakeRequest(referer, ctx);
-            //var parentresponse = await HarvestHelper.AttemptRequest(referer, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-            //                                                            WhoScoredConstants.RootUrl, null, @"euconsent=BOVu1IfOVu1IfABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; visid_incap_774904=/t5l9RDSS5C89/fvHh+pv01xTFsAAAAASUIPAAAAAACAXZWHAbkPzqLpwgKF6J+VxSsT1yPC6hpU; incap_ses_867_774904=D9LZV2Cj1UhtRXUXbzQIDL0Bx1sAAAAA8B31aB37Vng6nilidRNF+A==",
-            //                                                             "en-GB,en;q=0.9,en-US;q=0.8,th;q=0.7", false, _requestmanager, null, true, true);
             if (parentresponse != null)
             {
                 return GetLastModeKey(parentresponse.DocumentNode.InnerText);
@@ -111,8 +108,6 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
                                                            @"euconsent=BOVu1IfOVu1IfABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; visid_incap_774904=/t5l9RDSS5C89/fvHh+pv01xTFsAAAAASUIPAAAAAACAXZWHAbkPzqLpwgKF6J+VxSsT1yPC6hpU; incap_ses_867_774904=D9LZV2Cj1UhtRXUXbzQIDL0Bx1sAAAAA8B31aB37Vng6nilidRNF+A==",
                                                             "en-GB", true, false, false);
             return await _requestmanager.MakeRequest(url, ctx);
-            //return await HarvestHelper.AttemptRequest(url, "application/json,text/javascript,*/*; q=0.01", referer, lastmodekey, @"euconsent=BOVu1IfOVu1IfABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; visid_incap_774904=/t5l9RDSS5C89/fvHh+pv01xTFsAAAAASUIPAAAAAACAXZWHAbkPzqLpwgKF6J+VxSsT1yPC6hpU; incap_ses_867_774904=D9LZV2Cj1UhtRXUXbzQIDL0Bx1sAAAAA8B31aB37Vng6nilidRNF+A==",
-            //     "en-GB", true, _requestmanager, "playerTableStats");
         }
 
         private JArray ParsePlayersFromResponse(HtmlDocument response)
