@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Andgasm.BookieBreaker.SeasonParticipant.Core
+namespace Andgasm.BookieBreaker.SquadRegistration.Core
 {
     public class SquadRegistrationExtractorSvc : IHostedService
     {
@@ -22,7 +22,7 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             _newClubSeasonAssociationBus = newClubSeasonBus;
         }
 
-        public void Run()
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
             //using (var init = new CookieInitialiser(FiddlerVersion.Fiddler2))
             //{
@@ -33,6 +33,14 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             _logger.LogDebug("SquadRegistrationExtractor.Svc is registering to new season participant events...");
             _newClubSeasonAssociationBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
             _logger.LogDebug("SquadRegistrationExtractor.Svc is now listening for new season participant events...");
+            await Task.CompletedTask;
+        }
+
+        public async Task StopAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogDebug("SquadRegistrationExtractor.Svc is closing...");
+            await _newClubSeasonAssociationBus.Close();
+            _logger.LogDebug("SquadRegistrationExtractor.Svc has successfully shut down...");
         }
 
         static async Task ProcessMessagesAsync(IBusEvent message, CancellationToken c)
@@ -58,13 +66,6 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
             _logger.LogDebug($"- Stack: {context.StackTrace}");
             _logger.LogDebug($"- Source: {context.Source}");
             return Task.CompletedTask;
-        }
-
-        public async Task Stop()
-        {
-            _logger.LogDebug("SquadRegistrationExtractor.Svc is closing...");
-            await _newClubSeasonAssociationBus.Close();
-            _logger.LogDebug("SquadRegistrationExtractor.Svc has successfully shut down...");
         }
 
         // scratch code to manually invoke new season - invoke from startasync to debug without bus

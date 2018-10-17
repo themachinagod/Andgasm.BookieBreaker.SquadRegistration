@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Hosting;
+using System;
 using System.Threading.Tasks;
 
 namespace Andgasm.BookieBreaker.SquadRegistration.Extractor.Svc

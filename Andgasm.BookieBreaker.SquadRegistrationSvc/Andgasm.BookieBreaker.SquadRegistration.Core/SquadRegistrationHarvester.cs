@@ -9,7 +9,7 @@ using System.Dynamic;
 using Andgasm.Http;
 using Microsoft.Extensions.Configuration;
 
-namespace Andgasm.BookieBreaker.SeasonParticipant.Core
+namespace Andgasm.BookieBreaker.SquadRegistration.Core
 {
     public class SquadRegistrationHarvester : DataHarvest
     {
@@ -29,13 +29,13 @@ namespace Andgasm.BookieBreaker.SeasonParticipant.Core
         #endregion
 
         #region Contructors
-        public SquadRegistrationHarvester(IConfigurationRoot settings, ILogger<SquadRegistrationHarvester> logger, IRequestManager requestmanager)
+        public SquadRegistrationHarvester(IConfigurationRoot settings, ILogger<SquadRegistrationHarvester> logger, HarvestRequestManager requestmanager)
         {
             _logger = logger;
             _requestmanager = requestmanager;
 
-            _playersapiroot = settings[SettingsConstants.PlayersDbApiRootKey];
-            _registrationsApiPath = settings[SettingsConstants.PlayerSquadRegistrationsApiPathKey];
+            _playersapiroot = settings[Constants.PlayersDbApiRootKey];
+            _registrationsApiPath = settings[Constants.PlayerSquadRegistrationsApiPathKey];
             _settings = settings;
         }
         #endregion
