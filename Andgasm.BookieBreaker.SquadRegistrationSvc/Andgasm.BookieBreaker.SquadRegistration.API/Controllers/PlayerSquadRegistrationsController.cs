@@ -59,7 +59,7 @@ namespace Andgasm.BookieBreaker.SquadRegistration.API
                             SeasonKey = p.SeasonCode,
                             PlayerKey = p.PlayerCode,
                         };
-                            _context.PlayerClubSeasonAssociations.Add(association);
+                        _context.PlayerClubSeasonAssociations.Add(association);
                     }
                 }
                 if (dochange) await _context.SaveChangesAsync();

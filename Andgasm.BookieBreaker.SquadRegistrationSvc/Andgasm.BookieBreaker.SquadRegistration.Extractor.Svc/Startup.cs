@@ -47,7 +47,7 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Extractor.Svc
                     return new ApiSettings()
                     {
                         PlayersDbApiRootKey = Configuration.GetSection("API")["PlayersDbApiRootKey"],
-                        ClubSeasonRegistrationsApiPath = Configuration.GetSection("API")["ClubSeasonRegistrationsApiPath"]
+                        PlayerSquadRegistrationsApiPath = Configuration.GetSection("API")["PlayerSquadRegistrationsApiPath"]
                     };
                 });
 

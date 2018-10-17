@@ -19,6 +19,6 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
     public class ApiSettings
     {
         public string PlayersDbApiRootKey { get; set; }
-        public string ClubSeasonRegistrationsApiPath { get; set; }
+        public string PlayerSquadRegistrationsApiPath { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
     {
         #region Fields
         ILogger<SquadRegistrationHarvester> _logger;
-        IConfigurationRoot _settings;
+        ApiSettings _apisettings;
 
         string _playersapiroot;
         string _registrationsApiPath;
@@ -28,14 +28,14 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
         #endregion
 
         #region Contructors
-        public SquadRegistrationHarvester(IConfigurationRoot settings, ILogger<SquadRegistrationHarvester> logger, HarvestRequestManager requestmanager)
+        public SquadRegistrationHarvester(ApiSettings settings, ILogger<SquadRegistrationHarvester> logger, HarvestRequestManager requestmanager)
         {
             _logger = logger;
             _requestmanager = requestmanager;
 
-            _playersapiroot = settings[Constants.PlayersDbApiRootKey];
-            _registrationsApiPath = settings[Constants.PlayerSquadRegistrationsApiPathKey];
-            _settings = settings;
+            _playersapiroot = settings.PlayersDbApiRootKey;
+            _registrationsApiPath = settings.PlayerSquadRegistrationsApiPath;
+            _apisettings = settings;
         }
         #endregion
 
@@ -43,6 +43,9 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
         public override bool CanExecute()
         {
             if (!base.CanExecute()) return false;
+            if (string.IsNullOrWhiteSpace(StageCode)) return false;
+            if (string.IsNullOrWhiteSpace(SeasonCode)) return false;
+            if (string.IsNullOrWhiteSpace(ClubCode)) return false;
             return true;
         }
 
@@ -86,12 +89,13 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
         private async Task<string> DetermineLastModeKey()
         {
             var referer = CreateRefererUrl();
-            var ctx = HarvestHelper.ConstructRequestContext(LastModeKey, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8", WhoScoredConstants.RootUrl,
-                                                            @"euconsent=BOVozhmOVozhmABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; visid_incap_774904=3VHWR4OrQJ6JcpSUOUIzzJ40UlsBAAAAVUIPAAAAAACAaMiFAU1lv1DEH1MbjB042/jYOqYUG7V7; incap_ses_197_774904=JJddXBGQKXn3PIMs3eS7Ap8QxlsAAAAAf8t3QoOa9JJPMoXFyT3xuw==",
+            var ctx = HarvestHelper.ConstructRequestContext(null, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8", WhoScoredConstants.RootUrl,
+                                                            @"euconsent=BOVu1IfOVu1IfABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; visid_incap_774904=/t5l9RDSS5C89/fvHh+pv01xTFsAAAAASUIPAAAAAACAXZWHAbkPzqLpwgKF6J+VxSsT1yPC6hpU; incap_ses_867_774904=D9LZV2Cj1UhtRXUXbzQIDL0Bx1sAAAAA8B31aB37Vng6nilidRNF+A==",
                                                             "en-GB,en;q=0.9,en-US;q=0.8,th;q=0.7", false, true, true);
             var parentresponse = await _requestmanager.MakeRequest(referer, ctx);
             //var parentresponse = await HarvestHelper.AttemptRequest(referer, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-            //                                                            WhoScoredConstants.RootUrl, null, CookieString, "en-GB,en;q=0.9,en-US;q=0.8,th;q=0.7", false, _requestmanager, null, true, true);
+            //                                                            WhoScoredConstants.RootUrl, null, @"euconsent=BOVu1IfOVu1IfABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; visid_incap_774904=/t5l9RDSS5C89/fvHh+pv01xTFsAAAAASUIPAAAAAACAXZWHAbkPzqLpwgKF6J+VxSsT1yPC6hpU; incap_ses_867_774904=D9LZV2Cj1UhtRXUXbzQIDL0Bx1sAAAAA8B31aB37Vng6nilidRNF+A==",
+            //                                                             "en-GB,en;q=0.9,en-US;q=0.8,th;q=0.7", false, _requestmanager, null, true, true);
             if (parentresponse != null)
             {
                 return GetLastModeKey(parentresponse.DocumentNode.InnerText);
@@ -103,11 +107,12 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
         {
             var url = CreateRequestUrl();
             var referer = CreateRefererUrl();
-            var ctx = HarvestHelper.ConstructRequestContext(LastModeKey, "application/json,text/javascript,*/*; q=0.01", referer,
-                                                            @"euconsent=BOVozhmOVozhmABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; visid_incap_774904=3VHWR4OrQJ6JcpSUOUIzzJ40UlsBAAAAVUIPAAAAAACAaMiFAU1lv1DEH1MbjB042/jYOqYUG7V7; incap_ses_197_774904=JJddXBGQKXn3PIMs3eS7Ap8QxlsAAAAAf8t3QoOa9JJPMoXFyT3xuw==",
+            var ctx = HarvestHelper.ConstructRequestContext(lastmodekey, "application/json,text/javascript,*/*; q=0.01", referer,
+                                                           @"euconsent=BOVu1IfOVu1IfABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; visid_incap_774904=/t5l9RDSS5C89/fvHh+pv01xTFsAAAAASUIPAAAAAACAXZWHAbkPzqLpwgKF6J+VxSsT1yPC6hpU; incap_ses_867_774904=D9LZV2Cj1UhtRXUXbzQIDL0Bx1sAAAAA8B31aB37Vng6nilidRNF+A==",
                                                             "en-GB", true, false, false);
             return await _requestmanager.MakeRequest(url, ctx);
-            //return await HarvestHelper.AttemptRequest(url, "application/json,text/javascript,*/*; q=0.01", referer, lastmodekey, CookieString, "en-GB", true, _requestmanager, "playerTableStats");
+            //return await HarvestHelper.AttemptRequest(url, "application/json,text/javascript,*/*; q=0.01", referer, lastmodekey, @"euconsent=BOVu1IfOVu1IfABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; visid_incap_774904=/t5l9RDSS5C89/fvHh+pv01xTFsAAAAASUIPAAAAAACAXZWHAbkPzqLpwgKF6J+VxSsT1yPC6hpU; incap_ses_867_774904=D9LZV2Cj1UhtRXUXbzQIDL0Bx1sAAAAA8B31aB37Vng6nilidRNF+A==",
+            //     "en-GB", true, _requestmanager, "playerTableStats");
         }
 
         private JArray ParsePlayersFromResponse(HtmlDocument response)
@@ -131,7 +136,6 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
             player.Positions = playerdata["playedPositionsShort"].ToString();
             player.ClubKey = ClubCode;
             player.SeasonKey = SeasonCode;
-            player.PlayerKey = player.Key;
             return player;
         }
         #endregion
