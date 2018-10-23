@@ -1,4 +1,5 @@
-﻿using Andgasm.ServiceBus;
+﻿using Andgasm.BookieBreaker.Harvest.WhoScored;
+using Andgasm.ServiceBus;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -24,16 +25,8 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            //using (var init = new CookieInitialiser(FiddlerVersion.Fiddler2))
-            //{
-            //    init.Execute();
-            //    _harvester.CookieString = init.RealisedCookie;
-            //}
-
-            // DBr: temp scratch code line to manually test without bus!!
-            //await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-
             _logger.LogDebug("SquadRegistrationExtractor.Svc is registering to new season participant events...");
+            _harvester.CookieString = await CookieInitialiser.GetCookieFromRootDirectives();
             _newClubSeasonAssociationBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
             _logger.LogDebug("SquadRegistrationExtractor.Svc is now listening for new season participant events...");
             await Task.CompletedTask;

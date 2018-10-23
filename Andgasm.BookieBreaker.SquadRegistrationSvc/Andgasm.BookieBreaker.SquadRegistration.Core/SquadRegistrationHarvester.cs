@@ -89,9 +89,9 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
         private async Task<string> DetermineLastModeKey()
         {
             var referer = CreateRefererUrl();
-            var ctx = HarvestHelper.ConstructRequestContext(null, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8", WhoScoredConstants.RootUrl,
-                                                            @"euconsent=BOVu1IfOVu1IfABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; visid_incap_774904=/t5l9RDSS5C89/fvHh+pv01xTFsAAAAASUIPAAAAAACAXZWHAbkPzqLpwgKF6J+VxSsT1yPC6hpU; incap_ses_867_774904=D9LZV2Cj1UhtRXUXbzQIDL0Bx1sAAAAA8B31aB37Vng6nilidRNF+A==",
-                                                            "en-GB,en;q=0.9,en-US;q=0.8,th;q=0.7", false, true, true);
+            var ctx = HarvestHelper.ConstructRequestContext(null, "text/html, application/xhtml+xml, image/jxr, */*", WhoScoredConstants.RootUrl,
+                                                            CookieString,
+                                                            "en-GB,en;q=0.9,en-US;q=0.8,th;q=0.7", false, false, true);
             var parentresponse = await _requestmanager.MakeRequest(referer, ctx);
             if (parentresponse != null)
             {
@@ -105,9 +105,11 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Core
             var url = CreateRequestUrl();
             var referer = CreateRefererUrl();
             var ctx = HarvestHelper.ConstructRequestContext(lastmodekey, "application/json,text/javascript,*/*; q=0.01", referer,
-                                                           @"euconsent=BOVu1IfOVu1IfABABAENBE-AAAAcd7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-33d4-_1vV11yPg1urfIr1NpjQ6OGsA; visid_incap_774904=/t5l9RDSS5C89/fvHh+pv01xTFsAAAAASUIPAAAAAACAXZWHAbkPzqLpwgKF6J+VxSsT1yPC6hpU; incap_ses_867_774904=D9LZV2Cj1UhtRXUXbzQIDL0Bx1sAAAAA8B31aB37Vng6nilidRNF+A==",
+                                                           CookieString,
                                                             "en-GB", true, false, false);
-            return await _requestmanager.MakeRequest(url, ctx);
+            var p = await _requestmanager.MakeRequest(url, ctx);
+            CookieString = ctx.Cookies["Cookie"];
+            return p;
         }
 
         private JArray ParsePlayersFromResponse(HtmlDocument response)

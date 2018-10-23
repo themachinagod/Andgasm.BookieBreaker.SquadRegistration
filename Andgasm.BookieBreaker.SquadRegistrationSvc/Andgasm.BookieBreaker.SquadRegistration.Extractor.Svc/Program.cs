@@ -8,13 +8,13 @@ namespace Andgasm.BookieBreaker.SquadRegistration.Extractor.Svc
     {
         public static void Main(string[] args)
         {
-            Console.Title = "SeasonParticipantExtractor.Svc";
+            Console.Title = "SquadRegistrationExtractor.Svc";
             MainAsync().GetAwaiter().GetResult();
         }
 
         public static async Task MainAsync()
         {
-            Console.Title = "SeasonParticipantExtractor.Svc";
+            Console.Title = "SquadRegistrationExtractor.Svc";
             var boot = new Startup();
             await boot.Host.RunConsoleAsync();
         }
