@@ -2,18 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Authors>Danny Brown</Authors>
+    <Company>Andgasm</Company>
+    <Description>The BookieBreaker Squad Registration Core library provides implementations for extration and store of seasonal squad player registration data.</Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/themachinagod/Andgasm.BookieBreaker.SquadRegistrationSvc</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <Copyright>Andgasm Software Solutions</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Andgasm.BookieBreaker.Harvest" Version="0.0.11" />
     <PackageReference Include="Andgasm.Http" Version="0.0.2" />
     <PackageReference Include="Andgasm.ServiceBus" Version="0.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.Extensions.Hosting.Abstractions">
-      <HintPath>..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.hosting.abstractions\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.2.0" />
   </ItemGroup>
 
 </Project>
