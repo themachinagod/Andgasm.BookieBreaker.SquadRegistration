@@ -27,8 +27,8 @@ namespace Andgasm.BB.SquadRegistration.Core
         {
             _logger.LogDebug("SquadRegistrationExtractor.Svc is registering to new season participant events...");
             _harvester.CookieString = await CookieInitialiser.GetCookieFromRootDirectives();
-            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
-           // _newClubSeasonAssociationBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
+            //await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+            _newClubSeasonAssociationBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
             _logger.LogDebug("SquadRegistrationExtractor.Svc is now listening for new season participant events...");
             await Task.CompletedTask;
         }
