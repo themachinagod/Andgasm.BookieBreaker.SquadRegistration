@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using NJsonSchema;
-using NSwag.AspNetCore;
 
 namespace Andgasm.BookieBreaker.SquadRegistration.API
 {
@@ -28,39 +20,28 @@ namespace Andgasm.BookieBreaker.SquadRegistration.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging();
-            services.AddDbContext<SquadRegistrationDb>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddLogging(loggingBuilder => loggingBuilder
+                                .AddConsole()
+                                .SetMinimumLevel(LogLevel.Debug));
+            services.AddDbContext<SquadRegistrationDb>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
-            services.AddSwagger();
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwaggerUi3WithApiExplorer(settings =>
-                {
-                    settings.GeneratorSettings.Title = "Squad Registration Service";
-                    settings.GeneratorSettings.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase;
-                    settings.GeneratorSettings.DefaultEnumHandling = EnumHandling.String;
-                });
-                InitialiseData(app.ApplicationServices);
-            }
-            else
-            {
-                app.UseHsts();
-            }
+            app.UseDeveloperExceptionPage();
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
+            app.UseHsts();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseHttpsRedirection();
             app.UseMvc();
+            InitialiseData(app.ApplicationServices);
         }
 
         public static async void InitialiseData(IServiceProvider svcs)
