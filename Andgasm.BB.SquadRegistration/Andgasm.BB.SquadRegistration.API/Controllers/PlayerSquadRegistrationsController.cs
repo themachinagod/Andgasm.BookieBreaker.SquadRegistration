@@ -24,6 +24,23 @@ namespace Andgasm.BB.SquadRegistration.API
         }
         #endregion
 
+        [HttpGet(Name = "GetAllPlayers")]
+        public async Task<IActionResult> GetAll()
+        {
+            var d = await _context.Players.Select(x => new PlayerSquadRegistrationModel()
+            {
+                Surname = x.Surname,
+                Name = x.Name,
+                CountryCode = x.CountryKey,
+                DoB = x.DoB,
+                Height = x.Height,
+                Weight = x.Weight,
+                PlayerCode = x.Key,
+                Positions = x.Positions,
+            }).ToListAsync();
+            return Ok(d);
+        }
+
         [HttpPost(Name = "CreatePlayerSquadRegistration")]
         public async Task<IActionResult> Create([FromBody]List<PlayerSquadRegistrationModel> model)
         {
