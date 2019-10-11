@@ -15,10 +15,4 @@ namespace Andgasm.BB.SquadRegistration.Core
         public string NewSeasonTopicName { get; set; }
         public string NewSeasonSubscriptionName { get; set; }
     }
-
-    public class ApiSettings
-    {
-        public string PlayersDbApiRootKey { get; set; }
-        public string PlayerSquadRegistrationsApiPath { get; set; }
-    }
 }
