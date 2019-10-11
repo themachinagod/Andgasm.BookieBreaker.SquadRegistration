@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Andgasm.BookieBreaker.SquadRegistration.API
+namespace Andgasm.BB.SquadRegistration.API
 {
     public class PlayerSquadRegistrationModel
     {

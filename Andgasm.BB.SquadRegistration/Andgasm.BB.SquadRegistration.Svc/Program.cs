@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Andgasm.BookieBreaker.SquadRegistration.Extractor.Svc
+namespace Andgasm.BB.SquadRegistration.Svc
 {
     class Program
     {

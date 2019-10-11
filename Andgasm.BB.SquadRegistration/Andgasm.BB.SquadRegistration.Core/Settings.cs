@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Andgasm.BookieBreaker.SquadRegistration.Core
+namespace Andgasm.BB.SquadRegistration.Core
 {
     public class BusSettings
     {

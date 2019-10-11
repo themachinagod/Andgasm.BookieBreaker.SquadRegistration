@@ -4,12 +4,11 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
 using HtmlAgilityPack;
-using Andgasm.BookieBreaker.Harvest;
+using Andgasm.BB.Harvest;
 using System.Dynamic;
 using Andgasm.Http;
-using Microsoft.Extensions.Configuration;
 
-namespace Andgasm.BookieBreaker.SquadRegistration.Core
+namespace Andgasm.BB.SquadRegistration.Core
 {
     public class SquadRegistrationHarvester : DataHarvest
     {

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Andgasm.BookieBreaker.SquadRegistration.API
+namespace Andgasm.BB.SquadRegistration.API
 {
     public class Startup
     {

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Andgasm.BookieBreaker.SquadRegistration.API
+namespace Andgasm.BB.SquadRegistration.API
 {
     public class SquadRegistrationDb : DbContext
     {

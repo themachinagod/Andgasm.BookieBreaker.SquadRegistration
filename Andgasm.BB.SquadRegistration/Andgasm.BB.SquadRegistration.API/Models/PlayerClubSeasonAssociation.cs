@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Andgasm.BookieBreaker.SquadRegistration.API
+namespace Andgasm.BB.SquadRegistration.API
 {
     public class PlayerClubSeasonAssociation
     {

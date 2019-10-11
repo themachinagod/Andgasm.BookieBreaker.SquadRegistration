@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Andgasm.BookieBreaker.SquadRegistration.API
+namespace Andgasm.BB.SquadRegistration.API
 {
     [Route("api/[controller]")]
     [ApiController]

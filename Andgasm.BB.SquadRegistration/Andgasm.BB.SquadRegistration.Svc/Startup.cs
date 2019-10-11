@@ -1,5 +1,5 @@
-﻿using Andgasm.BookieBreaker.Harvest;
-using Andgasm.BookieBreaker.SquadRegistration.Core;
+﻿using Andgasm.BB.Harvest;
+using Andgasm.BB.SquadRegistration.Core;
 using Andgasm.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace Andgasm.BookieBreaker.SquadRegistration.Extractor.Svc
+namespace Andgasm.BB.SquadRegistration.Svc
 {
     class Startup
     {

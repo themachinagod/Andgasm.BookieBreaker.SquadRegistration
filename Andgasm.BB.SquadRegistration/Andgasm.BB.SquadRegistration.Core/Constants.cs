@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Andgasm.BookieBreaker.SquadRegistration.Core
+namespace Andgasm.BB.SquadRegistration.Core
 {
     public static class Constants
     {
