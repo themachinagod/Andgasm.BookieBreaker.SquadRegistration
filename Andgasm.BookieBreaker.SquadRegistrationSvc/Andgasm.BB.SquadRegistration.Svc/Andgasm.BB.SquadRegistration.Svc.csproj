@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Andgasm.BookieBreaker.SquadRegistration.Core\Andgasm.BookieBreaker.SquadRegistration.Core.csproj" />
+    <ProjectReference Include="..\Andgasm.BB.SquadRegistration.Core\Andgasm.BB.SquadRegistration.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

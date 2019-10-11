@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SquadRegistration.API", "Andgasm.BookieBreaker.SquadRegistration.API\Andgasm.BookieBreaker.SquadRegistration.API.csproj", "{DE6B63C3-5BA9-4790-B51F-0FEE768F59A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BB.SquadRegistration.API", "Andgasm.BB.SquadRegistration.API\Andgasm.BB.SquadRegistration.API.csproj", "{DE6B63C3-5BA9-4790-B51F-0FEE768F59A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SquadRegistration.Extractor.Svc", "Andgasm.BookieBreaker.SquadRegistration.Extractor.Svc\Andgasm.BookieBreaker.SquadRegistration.Extractor.Svc.csproj", "{A52DB58B-37F8-49B4-9DF7-28AC3F0ED8D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BB.SquadRegistration.Svc", "Andgasm.BB.SquadRegistration.Svc\Andgasm.BB.SquadRegistration.Svc.csproj", "{A52DB58B-37F8-49B4-9DF7-28AC3F0ED8D0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SquadRegistration.Core", "Andgasm.BookieBreaker.SquadRegistration.Core\Andgasm.BookieBreaker.SquadRegistration.Core.csproj", "{BD250895-9E9D-4E2E-80AF-B9205445B19A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BB.SquadRegistration.Core", "Andgasm.BB.SquadRegistration.Core\Andgasm.BB.SquadRegistration.Core.csproj", "{BD250895-9E9D-4E2E-80AF-B9205445B19A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Artifacts", "Artifacts", "{4CE8ABBA-190E-49A1-BD6B-6A1C63E98788}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,9 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Artifacts", "Artifacts", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{54B032EC-8AB3-4BB7-AB12-961DF70E5381}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SquadRegistration.Core.Tests", "Andgasm.BookieBreaker.SquadRegistration.Core.Tests\Andgasm.BookieBreaker.SquadRegistration.Core.Tests.csproj", "{D115AFDA-ECAD-44F7-8F43-32A563B41243}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BB.SquadRegistration.Core.Tests", "Andgasm.BB.SquadRegistration.Core.Tests\Andgasm.BB.SquadRegistration.Core.Tests.csproj", "{D115AFDA-ECAD-44F7-8F43-32A563B41243}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BookieBreaker.SquadRegistration.API.Tests", "Andgasm.BookieBreaker.SquadRegistration.API.Tests\Andgasm.BookieBreaker.SquadRegistration.API.Tests.csproj", "{20A64490-C1BB-477E-A486-A67068CC9523}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andgasm.BB.SquadRegistration.API.Tests", "Andgasm.BB.SquadRegistration.API.Tests\Andgasm.BB.SquadRegistration.API.Tests.csproj", "{20A64490-C1BB-477E-A486-A67068CC9523}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
