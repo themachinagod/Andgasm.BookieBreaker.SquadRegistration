@@ -27,7 +27,8 @@ namespace Andgasm.BB.SquadRegistration.Core
         {
             _logger.LogDebug("SquadRegistrationExtractor.Svc is registering to new season participant events...");
             _harvester.CookieString = await CookieInitialiser.GetCookieFromRootDirectives();
-            _newClubSeasonAssociationBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
+            await ProcessMessagesAsync(BuildNewClubSeasonAssociationEvent("15", "13786", "6335"), new CancellationToken());
+           // _newClubSeasonAssociationBus.RecieveEvents(ExceptionReceivedHandler, ProcessMessagesAsync);
             _logger.LogDebug("SquadRegistrationExtractor.Svc is now listening for new season participant events...");
             await Task.CompletedTask;
         }
@@ -64,14 +65,14 @@ namespace Andgasm.BB.SquadRegistration.Core
         }
 
         // scratch code to manually invoke new season - invoke from startasync to debug without bus
-        //static BusEventBase BuildNewClubSeasonAssociationEvent(string clubcode, string stagecode, string seasoncode)
-        //{
-        //    dynamic jsonpayload = new ExpandoObject();
-        //    jsonpayload.SeasonCode = seasoncode;
-        //    jsonpayload.StageCode = stagecode;
-        //    jsonpayload.ClubCode = clubcode;
-        //    var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
-        //    return new BusEventBase(payload);
-        //}
+        static BusEventBase BuildNewClubSeasonAssociationEvent(string clubcode, string stagecode, string seasoncode)
+        {
+            dynamic jsonpayload = new ExpandoObject();
+            jsonpayload.SeasonCode = seasoncode;
+            jsonpayload.StageCode = stagecode;
+            jsonpayload.ClubCode = clubcode;
+            var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
+            return new BusEventBase(payload);
+        }
     }
 }

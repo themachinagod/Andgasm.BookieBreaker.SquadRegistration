@@ -94,7 +94,8 @@ namespace Andgasm.BB.SquadRegistration.Core
             var parentresponse = await _requestmanager.MakeRequest(referer, ctx);
             if (parentresponse != null)
             {
-                return GetLastModeKey(parentresponse.DocumentNode.InnerText);
+                var r =  GetLastModeKey(parentresponse.DocumentNode.InnerHtml);
+                return r;
             }
             return null;
         }
@@ -115,8 +116,8 @@ namespace Andgasm.BB.SquadRegistration.Core
         {
             var rawdata = response.DocumentNode.InnerHtml;
             var startIndex = rawdata.IndexOf("{     \"playerTableStats\" : ");
-            var endIndex = rawdata.IndexOf(", \"paging\" :");
-            rawdata = rawdata.Substring(startIndex + 27, (endIndex - (startIndex + 27)));
+            var endIndex = rawdata.IndexOf(",  \"paging\"");
+            rawdata = rawdata.Substring(startIndex + 26, (endIndex - (startIndex + 26)));
             return JsonConvert.DeserializeObject<JArray>(rawdata);
         }
 
