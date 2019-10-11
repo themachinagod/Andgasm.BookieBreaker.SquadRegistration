@@ -22,7 +22,7 @@ namespace Andgasm.BB.SquadRegistration.Svc
                 config.SetBasePath(Environment.CurrentDirectory);
                 config.AddJsonFile("appsettings.json", optional: false);
                 config.AddJsonFile($"appsettings.{hostContext.HostingEnvironment.EnvironmentName}.json", optional: true);
-                config.AddUserSecrets<Startup>();
+                //config.AddUserSecrets<Startup>();
                 Configuration = config.Build();
             });
             ConfigureServices();
