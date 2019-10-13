@@ -49,6 +49,7 @@ namespace Andgasm.BB.SquadRegistration.Core
             _harvester.ClubCode = payloadvalues.ClubCode;
             _harvester.SeasonCode = payloadvalues.StageCode;
             _harvester.StageCode = payloadvalues.SeasonCode;
+            _harvester.CookieString = await CookieInitialiser.GetCookieFromRootDirectives();
             await _harvester.Execute();
             await _newClubSeasonAssociationBus.CompleteEvent(message.LockToken);
         }
@@ -56,9 +57,8 @@ namespace Andgasm.BB.SquadRegistration.Core
         static async Task ExceptionReceivedHandler(IExceptionArgs exceptionReceivedEventArgs)
         {
             _logger.LogDebug($"Message handler encountered an exception {exceptionReceivedEventArgs.Exception}.");
-            _logger.LogDebug($"Pausing request for 30s!");
-            await Task.Delay(30000);
-            _harvester.CookieString = await CookieInitialiser.GetCookieFromRootDirectives();
+            _logger.LogDebug($"Pausing service for 10s!");
+            await Task.Delay(10000);
 
             var context = exceptionReceivedEventArgs.Exception;
             _logger.LogDebug("Exception context for troubleshooting:");
