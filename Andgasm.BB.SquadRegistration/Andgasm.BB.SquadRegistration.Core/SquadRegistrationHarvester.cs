@@ -131,8 +131,8 @@ namespace Andgasm.BB.SquadRegistration.Core
             player.Height = playerdata["height"].ToString();
             player.Weight = playerdata["weight"].ToString();
             player.Positions = playerdata["playedPositionsShort"].ToString();
-            player.ClubKey = ClubCode;
-            player.SeasonKey = SeasonCode;
+            player.ClubCode = ClubCode;
+            player.SeasonCode = SeasonCode;
             return player;
         }
         #endregion
