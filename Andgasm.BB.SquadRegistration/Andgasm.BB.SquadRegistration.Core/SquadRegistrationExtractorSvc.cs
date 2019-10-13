@@ -53,15 +53,19 @@ namespace Andgasm.BB.SquadRegistration.Core
             await _newClubSeasonAssociationBus.CompleteEvent(message.LockToken);
         }
 
-        static Task ExceptionReceivedHandler(IExceptionArgs exceptionReceivedEventArgs)
+        static async Task ExceptionReceivedHandler(IExceptionArgs exceptionReceivedEventArgs)
         {
             _logger.LogDebug($"Message handler encountered an exception {exceptionReceivedEventArgs.Exception}.");
+            _logger.LogDebug($"Pausing request for 30s!");
+            await Task.Delay(30000);
+            _harvester.CookieString = await CookieInitialiser.GetCookieFromRootDirectives();
+
             var context = exceptionReceivedEventArgs.Exception;
             _logger.LogDebug("Exception context for troubleshooting:");
             _logger.LogDebug($"- Message: {context.Message}");
             _logger.LogDebug($"- Stack: {context.StackTrace}");
             _logger.LogDebug($"- Source: {context.Source}");
-            return Task.CompletedTask;
+            return;
         }
 
         // scratch code to manually invoke new season - invoke from startasync to debug without bus
