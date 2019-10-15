@@ -46,9 +46,9 @@ namespace Andgasm.BB.SquadRegistration.Core
             _logger.LogDebug($"Received message: Body:{payload}");
 
             dynamic payloadvalues = JsonConvert.DeserializeObject<ExpandoObject>(payload);
-            _harvester.ClubCode = payloadvalues.ClubCode;
-            _harvester.SeasonCode = payloadvalues.StageCode;
-            _harvester.StageCode = payloadvalues.SeasonCode;
+            _harvester.ClubKey = payloadvalues.ClubCode;
+            _harvester.SeasonKey = payloadvalues.StageCode;
+            _harvester.StageKey = payloadvalues.SeasonCode;
             _harvester.CookieString = await CookieInitialiser.GetCookieFromRootDirectives();
             await _harvester.Execute();
             await _newClubSeasonAssociationBus.CompleteEvent(message.LockToken);
@@ -72,9 +72,9 @@ namespace Andgasm.BB.SquadRegistration.Core
         static BusEventBase BuildNewClubSeasonAssociationEvent(string clubcode, string stagecode, string seasoncode)
         {
             dynamic jsonpayload = new ExpandoObject();
-            jsonpayload.SeasonCode = seasoncode;
-            jsonpayload.StageCode = stagecode;
-            jsonpayload.ClubCode = clubcode;
+            jsonpayload.SeasonKey = seasoncode;
+            jsonpayload.StageKey = stagecode;
+            jsonpayload.ClubKey = clubcode;
             var payload = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(jsonpayload));
             return new BusEventBase(payload);
         }

@@ -31,11 +31,11 @@ namespace Andgasm.BB.SquadRegistration.API
             {
                 Surname = x.Surname,
                 Name = x.Name,
-                CountryCode = x.CountryKey,
                 DoB = x.DoB,
                 Height = x.Height,
                 Weight = x.Weight,
-                PlayerCode = x.Key,
+                CountryKey = x.CountryKey,
+                PlayerKey = x.Key,
                 Positions = x.Positions,
             }).ToListAsync();
             return Ok(d);
@@ -49,32 +49,32 @@ namespace Andgasm.BB.SquadRegistration.API
                 bool dochange = false;
                 foreach (var p in model)
                 {
-                    if (!_context.Players.Any(x => x.Key == p.PlayerCode))
+                    if (!_context.Players.Any(x => x.Key == p.PlayerKey))
                     {
                         dochange = true;
                         var player = new Player()
                         {
-                            Key = p.PlayerCode,
+                            Key = p.PlayerKey,
                             Name = p.Name,
                             Surname = p.Surname,
                             DoB = p.DoB,
-                            CountryKey = p.CountryCode,
                             Height = p.Height,
                             Weight = p.Weight,
-                            Positions = p.Positions
+                            Positions = p.Positions,
+                            CountryKey = p.CountryKey,
                         };
                         _context.Players.Add(player);
                     }
-                    if (!_context.PlayerClubSeasonAssociations.Any(x => x.ClubKey == p.ClubCode && 
-                                                                    x.SeasonKey == p.SeasonCode && 
-                                                                    x.PlayerKey == p.PlayerCode))
+                    if (!_context.PlayerClubSeasonAssociations.Any(x => x.ClubKey == p.ClubKey && 
+                                                                    x.SeasonKey == p.SeasonKey && 
+                                                                    x.PlayerKey == p.PlayerKey))
                     {
                         dochange = true;
                         var association = new PlayerClubSeasonAssociation()
                         {
-                            ClubKey = p.ClubCode,
-                            SeasonKey = p.SeasonCode,
-                            PlayerKey = p.PlayerCode,
+                            ClubKey = p.ClubKey,
+                            SeasonKey = p.SeasonKey,
+                            PlayerKey = p.PlayerKey,
                         };
                         _context.PlayerClubSeasonAssociations.Add(association);
                     }

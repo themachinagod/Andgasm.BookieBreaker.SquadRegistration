@@ -6,6 +6,7 @@ namespace Andgasm.BB.SquadRegistration.API
 {
     public class PlayerSquadRegistrationModel
     {
+        public string PlayerKey { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Height { get; set; }
@@ -14,9 +15,8 @@ namespace Andgasm.BB.SquadRegistration.API
         public string Positions { get; set; }
         public string FullName { get { return string.Format("{0} {1}", Name, Surname); } }
 
-        public string PlayerCode { get; set; }
-        public string CountryCode { get; set; }
-        public string ClubCode { get; set; }
-        public string SeasonCode { get; set; }
+        public string CountryKey { get; set; }
+        public string ClubKey { get; set; }
+        public string SeasonKey { get; set; }
     }
 }

@@ -21,9 +21,9 @@ namespace Andgasm.BB.SquadRegistration.Core
         #endregion
 
         #region Properties
-        public string StageCode { get; set; }
-        public string SeasonCode { get; set; }
-        public string ClubCode { get; set; }
+        public string StageKey { get; set; }
+        public string SeasonKey { get; set; }
+        public string ClubKey { get; set; }
         #endregion
 
         #region Contructors
@@ -42,9 +42,9 @@ namespace Andgasm.BB.SquadRegistration.Core
         public override bool CanExecute()
         {
             if (!base.CanExecute()) return false;
-            if (string.IsNullOrWhiteSpace(StageCode)) return false;
-            if (string.IsNullOrWhiteSpace(SeasonCode)) return false;
-            if (string.IsNullOrWhiteSpace(ClubCode)) return false;
+            if (string.IsNullOrWhiteSpace(StageKey)) return false;
+            if (string.IsNullOrWhiteSpace(SeasonKey)) return false;
+            if (string.IsNullOrWhiteSpace(ClubKey)) return false;
             return true;
         }
 
@@ -63,11 +63,11 @@ namespace Andgasm.BB.SquadRegistration.Core
                         players.Add(CreateSquadPlayer(pl));
                     };
                     await HttpRequestFactory.Post(players, _playersapiroot, _registrationsApiPath);
-                    _logger.LogDebug(string.Format("Stored new player data to database for club key '{0}' and season key '{1}'", ClubCode, SeasonCode));
+                    _logger.LogDebug(string.Format("Stored new player data to database for club key '{0}' and season key '{1}'", ClubKey, SeasonKey));
                 }
                 else
                 {
-                    _logger.LogDebug(string.Format("Failed to store & commit player squad registration for season '{0}' in data store.", SeasonCode));
+                    _logger.LogDebug(string.Format("Failed to store & commit player squad registration for season '{0}' in data store.", SeasonKey));
                 }
                 HarvestHelper.FinaliseTimer(_timer);
             };
@@ -77,12 +77,12 @@ namespace Andgasm.BB.SquadRegistration.Core
         #region Entity Creation Helpers
         private string CreateRequestUrl()
         {
-            return string.Format(WhoScoredConstants.PlayerStatisticsFeedUrl, StageCode, ClubCode);
+            return string.Format(WhoScoredConstants.PlayerStatisticsFeedUrl, StageKey, ClubKey);
         }
 
         private string CreateRefererUrl()
         {
-            return string.Format(WhoScoredConstants.ClubsUrl, ClubCode);
+            return string.Format(WhoScoredConstants.ClubsUrl, ClubKey);
         }
 
         private async Task<string> DetermineLastModeKey()
@@ -127,12 +127,12 @@ namespace Andgasm.BB.SquadRegistration.Core
             player.Name = playerdata["firstName"].ToString();
             player.Surname = playerdata["lastName"].ToString();
             player.CountryKey = playerdata["regionCode"].ToString();
-            player.PlayerCode = playerdata["playerId"].ToString();
+            player.PlayerKey = playerdata["playerId"].ToString();
             player.Height = playerdata["height"].ToString();
             player.Weight = playerdata["weight"].ToString();
             player.Positions = playerdata["playedPositionsShort"].ToString();
-            player.ClubCode = ClubCode;
-            player.SeasonCode = SeasonCode;
+            player.ClubKey = ClubKey;
+            player.SeasonKey = SeasonKey;
             return player;
         }
         #endregion
