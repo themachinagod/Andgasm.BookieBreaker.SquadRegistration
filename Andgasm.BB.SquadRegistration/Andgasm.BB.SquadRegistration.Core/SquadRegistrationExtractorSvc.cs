@@ -46,9 +46,9 @@ namespace Andgasm.BB.SquadRegistration.Core
             _logger.LogDebug($"Received message: Body:{payload}");
 
             dynamic payloadvalues = JsonConvert.DeserializeObject<ExpandoObject>(payload);
-            _harvester.ClubKey = payloadvalues.ClubCode;
-            _harvester.SeasonKey = payloadvalues.StageCode;
-            _harvester.StageKey = payloadvalues.SeasonCode;
+            _harvester.ClubKey = payloadvalues.ClubKey;
+            _harvester.SeasonKey = payloadvalues.StageKey;
+            _harvester.StageKey = payloadvalues.SeasonKey;
             _harvester.CookieString = await CookieInitialiser.GetCookieFromRootDirectives();
             await _harvester.Execute();
             await _newClubSeasonAssociationBus.CompleteEvent(message.LockToken);
